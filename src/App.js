@@ -1,14 +1,15 @@
 import './App.css';
 import { BrowserRouter as Router , Switch , Route } from 'react-router-dom'
 import GlobalStyle from './GlobalStyles.style'
-import Navbar from './components/Navbar';
+//Pages
+import Home from './pages/Home.jsx'
+
 function App() {
   return (
     <Router>
       <GlobalStyle/>
-      <Navbar/>
       <Switch>
-        <Route path="/" exacts></Route>
+        <Route path="/" component={Home} exacts></Route>
         <div className="App">
         </div>
       </Switch>

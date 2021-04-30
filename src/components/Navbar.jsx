@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import Button from './Button' 
-import Styles, { CartLink, RegisterLink , ButtonsContainer, Logo, NavContainer } from './Navbar.styles'
+import { CartLink, RegisterLink , ButtonsContainer, Logo, NavContainer } from './Navbar.styles'
 import cartIcon from '../images/cart.png'
 
 export class Navbar extends Component {
