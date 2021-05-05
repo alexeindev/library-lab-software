@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import GlobalStyle from "./GlobalStyles.style";
 //Pages
 import Home from "./pages/Home.jsx";
-import Singup from "./pages/Singup.jsx";
+import Singup from "./pages/Singup";
 
 function App() {
   return (

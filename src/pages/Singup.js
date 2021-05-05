@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Button from "../components/Button";
 import image from "../images/register-img.png";
-import { auth } from "../firebase";
+import { db, auth} from "../firebase";
 
 import { useHistory } from "react-router-dom";
 
@@ -19,22 +19,23 @@ import {
 } from "./Singup.styles";
 import { Link } from "react-router-dom";
 
-const Singup = (props) => {
+const Singup = () => {
   const initialStateValues = {
-    codigo: "",
-    nombre: "",
-    apellido: "",
-    email: "",
-    direccion: "",
-    genero: "",
-    nacimiento: "",
-    clave: "",
-    clave2: "",
+    codigo: '',
+    nombre: '',
+    apellido: '',
+    email: '',
+    direccion: '',
+    genero: '',
+    nacimiento: '',
+    clave: '',
+    clave2: ''
   };
 
   const [values, setValues] = useState(initialStateValues);
   const [email, setEmail] = useState("");
   const [clave, setClave] = useState("");
+  const [clave2, setClave2] = useState("");
   const history = useHistory();
 
   const handleInputChange = (e) => {
@@ -46,24 +47,29 @@ const Singup = (props) => {
     if (name === "clave") {
       setClave(value);
     }
+    if (name === "clave2") {
+      setClave2(value);
+    }
   };
+
 
   const create_user = async () => {
     await auth.createUserWithEmailAndPassword(email, clave);
+    await db.collection('users').doc().set(values);
   };
 
-  const handlesubmit = (e) => {
+
+  const handlesubmit  =  (e) => {
     e.preventDefault();
 
-    if (values.clave === values.clave2) {
+    if (clave === clave2) {
       create_user();
+      console.log(values);
+      history.push("/");
     } else {
       alert("Las contraseñas no son iguales");
     }
-
-    //console.log(email,clave)
     setValues({ ...initialStateValues });
-    history.push("/");
   };
 
   return (
