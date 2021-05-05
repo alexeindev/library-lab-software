@@ -1,17 +1,19 @@
-import './App.css';
-import { BrowserRouter as Router , Switch , Route } from 'react-router-dom'
-import GlobalStyle from './GlobalStyles.style'
+import "./App.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import GlobalStyle from "./GlobalStyles.style";
 //Pages
-import Home from './pages/Home.jsx'
+import Home from "./pages/Home.jsx";
+import Singup from "./pages/Singup.jsx";
 
 function App() {
   return (
     <Router>
-      <GlobalStyle/>
+      <GlobalStyle />
       <Switch>
-        <Route path="/" component={Home} exacts></Route>
-        <div className="App">
-        </div>
+        <Route exact path='/' component={Home}></Route>
+        <Route exact path='/sing-up' component={Singup}></Route>
+        {/* <Route component={PageNotFound}/> */}
+        <div className='App'></div>
       </Switch>
     </Router>
   );
