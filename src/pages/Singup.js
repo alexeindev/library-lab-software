@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Button from "../components/Button";
 import image from "../images/register-img.png";
-import { db, auth} from "../firebase";
-
 import { useHistory } from "react-router-dom";
-
 import { FormLabel, FormInput, FormGroup } from "../components/Form";
 import {
   Container,
@@ -18,6 +15,7 @@ import {
   ButtonContainer,
 } from "./Singup.styles";
 import { Link } from "react-router-dom";
+import { useAuth  } from "../contexts/AuthContext";
 
 const Singup = () => {
   const initialStateValues = {
@@ -37,6 +35,7 @@ const Singup = () => {
   const [clave, setClave] = useState("");
   const [clave2, setClave2] = useState("");
   const history = useHistory();
+  const {signup} = useAuth();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -53,9 +52,8 @@ const Singup = () => {
   };
 
 
-  const create_user = async () => {
-    await auth.createUserWithEmailAndPassword(email, clave);
-    await db.collection('users').doc().set(values);
+  const create_user = () => {
+    signup(email,clave,values);
   };
 
 
@@ -131,7 +129,6 @@ const Singup = () => {
                 <Text>¿Olvidaste tu contraseña?</Text>
               </Link>
               <ButtonContainer>
-                <Button light>Iniciar sesión</Button>
                 <Button type='submit'>Registrarse</Button>
               </ButtonContainer>
             </FormContainer>

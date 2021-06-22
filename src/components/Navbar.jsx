@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link ,useHistory } from "react-router-dom";
 import Button from "./Button";
 import {
   CartLink,
@@ -9,9 +9,18 @@ import {
   NavContainer,
 } from "./Navbar.styles";
 import cartIcon from "../images/cart.png";
+import { useAuth } from "../contexts/AuthContext";
 
-export class Navbar extends Component {
-  render() {
+function Navbar() {
+  
+  const {currentUser} = useAuth()
+  const {logout} = useAuth()
+  const history = useHistory();
+  
+  const logout_f = async () =>{
+    await logout();
+    history.push("/");
+  }
     return (
       <div>
         <NavContainer>
@@ -19,10 +28,24 @@ export class Navbar extends Component {
             <Logo>Librería</Logo>
           </Link>
           <ButtonsContainer>
-            <Link style={{ textDecoration: "none" }} to='/sing-up'>
+            {currentUser && 
+            <Button light>{currentUser.email}</Button>
+            }
+            {!currentUser &&
+              <Link style={{ textDecoration: "none" }} to='/sing-up'>
               <RegisterLink>Registrarse</RegisterLink>
+              </Link>
+            }
+            {!currentUser &&
+            <Link style={{ textDecoration: "none" }} to='/login'>
+              <Button light>Iniciar Sesión</Button>
             </Link>
-            <Button light>Iniciar Sesión</Button>
+            }
+            {currentUser &&
+              <form onSubmit={logout_f}>
+              <Button  light>Cerrar Sesion</Button>
+              </form>
+            }           
             <Link style={{ textDecoration: "none" }} to='/'>
               <CartLink>
                 Mi carrito <img src={cartIcon} alt='shopping cart' />{" "}
@@ -32,7 +55,7 @@ export class Navbar extends Component {
         </NavContainer>
       </div>
     );
-  }
+  
 }
 
 export default Navbar;
