@@ -20,7 +20,7 @@ function Navbar() {
   const logout_f = async () =>{
     await logout();
     history.push("/");
-  }
+  };
     return (
       <div>
         <NavContainer>
@@ -28,8 +28,10 @@ function Navbar() {
             <Logo>Librería</Logo>
           </Link>
           <ButtonsContainer>
-            {currentUser && 
-            <Button light>{currentUser.email}</Button>
+            {currentUser &&
+            <Link style={{ textDecoration: "none" }} to='/mi-perfil'>
+              <Button light>{currentUser.email}</Button>
+            </Link>
             }
             {!currentUser &&
               <Link style={{ textDecoration: "none" }} to='/sing-up'>
