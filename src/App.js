@@ -9,6 +9,8 @@ import Login from "./pages/Login";
 import Mi_perfil from "./pages/Mi_perfil";
 import Editar_perfil from "./pages/Editar_perfil";
 import PrivateRoute from "./components/PrivateRoute"
+import Admin_libros from "./pages/Admin_libros";
+import Ingresar_Libros from "./pages/Ingresar_Libros";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route exact path='/login' component={Login}></Route>
         <PrivateRoute exact path='/mi-perfil' component={Mi_perfil}></PrivateRoute>
         <PrivateRoute exact path='/edit-perfil' component={Editar_perfil}></PrivateRoute>
+        <PrivateRoute exact path='/admi-libros' component={Admin_libros}></PrivateRoute>
+        <PrivateRoute exact path='/ingre-libros' component={Ingresar_Libros}></PrivateRoute>
         {/* <Route component={PageNotFound}/> */}
         <div className='App'></div>
       </Switch>

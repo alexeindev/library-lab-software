@@ -39,3 +39,6 @@ export const FormLabel = styled.label`
   line-height: 28px;
   padding-bottom: 5px;
 `;
+
+export const GuardarButton = styled.button`
+`;
