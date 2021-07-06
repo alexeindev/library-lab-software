@@ -3,23 +3,35 @@ import Navbar from "../components/Navbar";
 import Button from "../components/Button";
 import {Container,Title} from "./Editar_perfil.styles";
 import { Link } from "react-router-dom";
-import {db} from "../firebase"
+import {db,storage} from "../firebase"
 function Admin_libros() {
     const[libros,setLibros]=useState([]);
     
 
-    const getLibros = async () => {
-        const docs =[];
+    const getLibros = () => {
+        
         db.collection("libros").onSnapshot((querySnapshot) =>{
-           querySnapshot.forEach(async (doc)=>{
+            const docs =[];
+            querySnapshot.forEach((doc)=>{
                 docs.push({...doc.data(), id:doc.id});
             })
             setLibros(docs);
         });
-
-        
     };
-
+    
+    const deleteLibro = async( id, name)=>{
+       if (window.confirm('Estas seguro que desear eliminar este libro ?')){
+            await db.collection('libros').doc(id).delete();
+            var desertRef = storage.ref('/librosImgs/'+name);
+            // Delete the file
+            await desertRef.delete().then(function() {
+            // File deleted successfully
+            }).catch(function(error) {
+            // Uh-oh, an error occurred!
+            });
+            console.log('Task eliminada')
+       }
+    }
     useEffect(()=>{
         getLibros();
      },[]);
@@ -56,7 +68,7 @@ function Admin_libros() {
                                 <th>{libro.estado}</th>
                                 <th><Link to='/'>Editar</Link><th>
                                     <Link to='/'>Administrar Existencias</Link><th>
-                                    <Link to='/'>Eliminar</Link></th></th>
+                                    <i onClick={()=>{deleteLibro(libro.id,libro.titulo)}}>Eliminar</i></th></th>
                                 </th>
                             </tr>
                         </tbody>

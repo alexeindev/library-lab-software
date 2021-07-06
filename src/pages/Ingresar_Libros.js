@@ -33,10 +33,21 @@ function Ingresar_Libros(props) {
         const { name, value } = e.target;
         setValues({ ...values, [name]: value });
     };
+    const deleteImg = async(storageRef) => {
+        storageRef.delete().then(function() {
+            // File deleted successfully
+            }).catch(function(error) {
+            // Uh-oh, an error occurred!
+        });
+    }
     const urlImage = async(e) => {
         const file = e.target.files[0]
         //setImgfile(file);
-        setUrl(URL.createObjectURL(file))
+        if (file !== '') {
+            setUrl(URL.createObjectURL(file))
+            var storageRef = storage.ref('/librosImgs/'+values.titulo)
+            await deleteImg(storageRef)
+        }
         setValues({...values,portada: await updateStorage(file)})
     }
     const updateStorage= async(imgfile) => {
@@ -55,7 +66,9 @@ function Ingresar_Libros(props) {
         }else{return ''}
         
     }
-    const cancelarsubmit = () => {
+    const cancelarsubmit = async () => {
+        var storageRef = storage.ref('/librosImgs/'+values.titulo)
+        await deleteImg(storageRef)
         history.push("/mi-perfil")
     }
     const handlesubmit  =  async(e) => {
