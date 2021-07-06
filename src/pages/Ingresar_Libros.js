@@ -24,6 +24,7 @@ function Ingresar_Libros(props) {
     //const {currentUser} = useAuth()
     const {createLibros} = useAuth()
     const[values, setValues]=useState(initialStateValues);
+    //const[imgfile, setImgfile]=useState({});
     const[url, setUrl]=useState([]);
     //const[file,setFile]=useState([]);
     const history = useHistory();
@@ -32,23 +33,26 @@ function Ingresar_Libros(props) {
         const { name, value } = e.target;
         setValues({ ...values, [name]: value });
     };
-    const urlImage = (e) => {
+    const urlImage = async(e) => {
         const file = e.target.files[0]
-        const {name} = e.target;
-        setValues({ ...values, [name]: file });
+        //setImgfile(file);
         setUrl(URL.createObjectURL(file))
+        setValues({...values,portada: await updateStorage(file)})
     }
-    const updateStorage= async(e) => {
-        var storageRef = storage.ref('/librosImgs/'+values.titulo)
-        //guardar en fire storage
-        await storageRef.put(values.portada).then(function(snapshot) {
-            console.log('Uploaded a blob or file!');
-          });
-          //obtener el URL
-        await storageRef.getDownloadURL().then(function(url) {
-            console.log(url)
-          })
-        
+    const updateStorage= async(imgfile) => {
+        if (imgfile !== '') {
+            var storageRef = storage.ref('/librosImgs/'+values.titulo)
+            //guardar en fire storage
+            await storageRef.put(imgfile).then(function(snapshot) {
+                console.log('Uploaded a blob or file!');
+            });
+            //obtener el URL
+            var result = ''
+            await storageRef.getDownloadURL().then(function(url) {
+                result = url
+            })
+            return result
+        }else{return ''}
         
     }
     const cancelarsubmit = () => {
@@ -56,9 +60,9 @@ function Ingresar_Libros(props) {
     }
     const handlesubmit  =  async(e) => {
         e.preventDefault();
-        updateStorage()
-        createLibros(values)
         console.log(values)
+        await createLibros(values)
+        
         setValues({ ...initialStateValues });
         history.push("/mi-perfil")
     };
@@ -68,7 +72,7 @@ function Ingresar_Libros(props) {
             <Container>
                 <Navbar/>
                 <Title>Añadir Libro</Title>
-                <form onSubmit={handlesubmit}>
+                <form name='portada'  onSubmit={handlesubmit}>
                     <FormGroup id='titulo'>
                         <FormLabel>Titulo</FormLabel>
                         <FormInput
@@ -170,7 +174,7 @@ function Ingresar_Libros(props) {
                     <img src={url} alt="portada" />
                     
                     
-                    <Button  type="submit" >Guardar</Button>
+                    <Button type="submit" >Guardar</Button>
                 </form>
                 <form onSubmit={cancelarsubmit}>
                     <Button type="submit" light>Cancelar</Button>

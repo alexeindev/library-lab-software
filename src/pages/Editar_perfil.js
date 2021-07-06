@@ -100,10 +100,10 @@ function Editar_perfil() {
                         value={user.nacimiento}
                         />
                     </FormGroup>
-                    <FormGroup id='nombre'>
+                    <FormGroup id='direccion'>
                         <FormLabel>Direccion de Envio</FormLabel>
                         <FormInput
-                        name='nombre'
+                        name='direccion'
                         onChange={handleInputChange}
                         value={user.direccion}
                         />
