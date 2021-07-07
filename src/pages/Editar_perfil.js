@@ -60,7 +60,7 @@ function Editar_perfil() {
     };
     useEffect(()=>{
         getUser();
-     },[]);
+     },[]); // eslint-disable-line react-hooks/exhaustive-deps
     return (
         <div>
             <Container>

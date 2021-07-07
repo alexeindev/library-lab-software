@@ -44,3 +44,35 @@ export const HeroInformationContainer = styled.div`
     align-items: flex-start;
   }
 `;
+
+export const LibrosContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const LibrosTitulo = styled.h4`
+  color: #34325E;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+`;
+
+export const LibrosPrecio = styled.h6`
+  color: #34325E;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+`;
+
+  
+export const ImgLibro = styled.img`
+  width: 265.31px;
+  high: 400px;
+  padding: 50px;
+  @media (min-width: 768px) {
+    width: 265.31px;
+  }
+`;
