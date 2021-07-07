@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react"
-import { auth } from "../firebase"
+import { auth, db } from "../firebase"
 
 const AuthContext = React.createContext()
 
@@ -11,18 +11,37 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState()
   const [loading, setLoading] = useState(true)
 
-  function signup(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password)
+  async function signup  (email, password,values) {
+    await auth.createUserWithEmailAndPassword(email, password);
+    await db.collection('users').doc().set(values);
+  }
+
+  async function createLibros  (values) {
+    await db.collection('libros').doc().set(values);
   }
 
   function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password)
+    auth.signInWithEmailAndPassword(email, password)
+    .catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      if (errorCode === 'auth/wrong-password') {
+        alert('Wrong password.');
+      } else {
+        alert(errorMessage);
+      }
+      console.log(error);
+    });
   }
 
   function logout() {
     return auth.signOut()
   }
 
+  function editcollection(values,id){
+    return db.collection('users').doc(id).update(values);
+  }
   function resetPassword(email) {
     return auth.sendPasswordResetEmail(email)
   }
@@ -47,6 +66,8 @@ export function AuthProvider({ children }) {
   const value = {
     currentUser,
     login,
+    createLibros,
+    editcollection,
     signup,
     logout,
     resetPassword,
