@@ -11,6 +11,7 @@ import Editar_perfil from "./pages/Editar_perfil";
 import PrivateRoute from "./components/PrivateRoute"
 import Admin_libros from "./pages/Admin_libros";
 import Ingresar_Libros from "./pages/Ingresar_Libros";
+import LibrosPage from "./pages/LibrosPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route exact path='/' component={Home}></Route>
         <Route exact path='/sing-up' component={Singup}></Route>
         <Route exact path='/login' component={Login}></Route>
+        <Route path='/libros/:keyword' component={LibrosPage}></Route>
         <PrivateRoute exact path='/mi-perfil' component={Mi_perfil}></PrivateRoute>
         <PrivateRoute exact path='/edit-perfil' component={Editar_perfil}></PrivateRoute>
         <PrivateRoute exact path='/admi-libros' component={Admin_libros}></PrivateRoute>

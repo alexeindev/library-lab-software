@@ -27,7 +27,8 @@ const Singup = () => {
     genero: '',
     nacimiento: '',
     clave: '',
-    clave2: ''
+    clave2: '',
+    saldo: ''
   };
 
   const [values, setValues] = useState(initialStateValues);

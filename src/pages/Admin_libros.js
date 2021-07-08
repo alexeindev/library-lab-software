@@ -67,7 +67,7 @@ function Admin_libros() {
                                 <th>{libro.estado}</th>
                                 <th><Link to='/'>Editar</Link><th>
                                     <Link to='/'>Administrar Existencias</Link><th>
-                                    <i onClick={()=>{deleteLibro(libro.id,libro.titulo)}}>Eliminar</i></th></th>
+                                    <Link onClick={()=>{deleteLibro(libro.id,libro.titulo)}}>Eliminar</Link></th></th>
                                 </th>
                             </tr>
                         </tbody>
