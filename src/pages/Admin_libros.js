@@ -22,6 +22,11 @@ function Admin_libros() {
         });
     };
     
+    const onRedirect = (keyword) => {
+        const valor = '/edit-libros/'+ keyword
+        return valor
+    }
+
     const deleteLibro = async( id, name)=>{
        if (window.confirm('Estas seguro que desear eliminar este libro ?')){
             await db.collection('libros').doc(id).delete();
@@ -69,9 +74,8 @@ function Admin_libros() {
                                 <th>{libro.autor}</th>
                                 <th>{libro.genero}</th>
                                 <th>{libro.estado}</th>
-                                <th><Link to='/'>Editar</Link><th>
-                                    <Link to='/'>Administrar Existencias</Link><th>
-                                    <Link onClick={()=>{deleteLibro(libro.id,libro.titulo)}}>Eliminar</Link></th></th>
+                                <th><Link to={onRedirect(libro.id)}>Editar</Link><th>
+                                    <Link onClick={()=>{deleteLibro(libro.id,libro.titulo)}}>Eliminar</Link></th>
                                 </th>
                             </tr>
                         </tbody>

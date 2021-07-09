@@ -193,11 +193,13 @@ function Ingresar_Libros(props) {
               <FormRow>
                 <FormGroup id='descripcion'>
                   <FormLabel>Descripcion</FormLabel>
-                  <FormInput
-                    name='descripcion'
-                    value={values.descripcion}
+                  <textarea 
                     onChange={handleInputChange}
-                  />
+                    name='descripcion' 
+                    rows="10"
+                    cols="50" 
+                    value={values.descripcion}>
+                  </textarea>
                 </FormGroup>
               </FormRow>
            

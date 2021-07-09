@@ -38,7 +38,7 @@ function Mi_perfil() {
                         <Link style={{ textDecoration: "none" }} to='/pedidos'>
                             <Links>Pedidos</Links>
                         </Link>
-                        <Link style={{ textDecoration: "none" }} to='/'>
+                        <Link style={{ textDecoration: "none" }} to='/info-financiera'>
                             <Links>Informacion financiera</Links>
                         </Link>
                         
