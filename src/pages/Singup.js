@@ -28,7 +28,7 @@ const Singup = () => {
     nacimiento: '',
     clave: '',
     clave2: '',
-    saldo: ''
+    saldo: '0'
   };
 
   const [values, setValues] = useState(initialStateValues);
@@ -61,12 +61,12 @@ const Singup = () => {
   const handlesubmit  =  (e) => {
     e.preventDefault();
 
-    if (clave === clave2) {
+    if (clave === clave2 && clave !== '' && email !==''&& clave.length >= 6) {
       create_user();
       console.log(values);
       history.push("/");
     } else {
-      alert("Las contraseñas no son iguales");
+      alert("Las contraseñas no son iguales / campos sin rellenar/ la constraseña debe ser mayor o igual a 6 caracteres");
     }
     setValues({ ...initialStateValues });
   };

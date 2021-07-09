@@ -1,0 +1,16 @@
+table{
+    table-layout: fixed;
+    width: 100px;
+}
+  
+tbody:hover{
+  background-color: #f39a348c;
+}
+
+.card{
+  width: 500px;
+  margin: 0 auto; 
+  float: none; 
+  margin-bottom: 10px; 
+  }
+

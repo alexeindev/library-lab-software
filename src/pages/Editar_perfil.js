@@ -24,6 +24,7 @@ function Editar_perfil() {
     nacimiento: "",
     clave: "",
     clave2: "",
+    saldo: "0",
   };
 
   const { currentUser } = useAuth();
@@ -46,15 +47,13 @@ function Editar_perfil() {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
-    console.log(currentUser);
   };
 
   const cancelarsubmit = () => {
     history.push("/mi-perfil");
   };
-  const handlesubmit = async (e) => {
-    e.preventDefault();
-    await editcollection(user, id);
+  const handlesubmit = async () => {
+    await editcollection(user, id, 'users');
     console.log(user);
     history.push("/mi-perfil");
   };
@@ -66,7 +65,7 @@ function Editar_perfil() {
       <Container>
         <Navbar />
         <Title>Editar perfil</Title>
-        <form onSubmit={handlesubmit}>
+        
           <FormRow>
             <FormGroup id='nombre'>
               <FormLabel>Nombre</FormLabel>
@@ -121,44 +120,49 @@ function Editar_perfil() {
               disabled={true}
             />
           </FormGroup>
-          <FormRow>
+          <div className="container">
             <FormGroup id='genero'>
-              <FormLabel>Genero</FormLabel>
-              <label for='Masculino'>Masculino</label>
-              <FormInput
-                type='radio'
-                name='genero'
-                value='Masculino'
-                onChange={handleInputChange}
-                disabled={true}
-              />
-              <label for='Femenino'>Femenino</label>
-              <FormInput
-                type='radio'
-                value='Femenino'
-                name='genero'
-                onChange={handleInputChange}
-                disabled={true}
-              />
-              <label for='Otro'>Otro</label>
-              <FormInput
-                type='radio'
-                name='genero'
-                value='Otro'
-                onChange={handleInputChange}
-                disabled={true}
-              />
+              <div className="col-12 text-center">
+                <FormLabel>Genero</FormLabel>
+              </div>
+              <div className="row">
+                <div className="col-4 text-center">
+                  <label >Masculino</label>
+                  <FormInput
+                    type='radio'
+                    name='genero'
+                    value='Masculino'
+                    onChange={handleInputChange}
+                    disabled={true}
+                  />
+                </div>
+                <div className="col-4 text-center">
+                  <label>Femenino</label>
+                  <FormInput
+                    type='radio'
+                    value='Femenino'
+                    name='genero'
+                    onChange={handleInputChange}
+                    disabled={true}
+                  />
+                </div>
+                <div className="col-4 text-center">
+                  <label>Otro</label>
+                  <FormInput
+                    type='radio'
+                    name='genero'
+                    value='Otro'
+                    onChange={handleInputChange}
+                    disabled={true}
+                  />
+                </div>
+              </div>
             </FormGroup>
-          </FormRow>
+          </div>
           <FormRow>
-            <Button type='submit'>Guardar</Button>
+              <i onClick={()=>{handlesubmit()}}><Button type='submit'>Guardar</Button></i>
+              <i onClick={()=>{cancelarsubmit()}}><Button type='submit' light>Cancelar</Button></i>
           </FormRow>
-        </form>
-        <form onSubmit={cancelarsubmit}>
-              <Button type='submit' light>
-                Cancelar
-              </Button>
-        </form>
       </Container>
     </div>
   );

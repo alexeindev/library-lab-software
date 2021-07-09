@@ -35,17 +35,11 @@ function Mi_perfil() {
                         <Link style={{ textDecoration: "none" }} to='/edit-perfil'>
                             <Links>Editar Perfil</Links>
                         </Link>
-                        <Link style={{ textDecoration: "none" }} to='/'>
+                        <Link style={{ textDecoration: "none" }} to='/pedidos'>
                             <Links>Pedidos</Links>
                         </Link>
                         <Link style={{ textDecoration: "none" }} to='/'>
                             <Links>Informacion financiera</Links>
-                        </Link>
-                        <Link style={{ textDecoration: "none" }} to='/'>
-                            <Links>Editorial</Links>
-                        </Link>
-                        <Link style={{ textDecoration: "none" }} to='/'>
-                            <Links>Idiomas</Links>
                         </Link>
                         
                     </InfoContainer>

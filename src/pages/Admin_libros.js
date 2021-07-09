@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import {Container,Title} from "./Editar_perfil.styles";
 import { Link } from "react-router-dom";
 import {db,storage} from "../firebase"
+import '../App.css'
 function Admin_libros() {
     const[libros,setLibros]=useState([]);
     
@@ -13,6 +14,9 @@ function Admin_libros() {
             const docs =[];
             querySnapshot.forEach((doc)=>{
                 docs.push({...doc.data(), id:doc.id});
+            })
+            docs.sort(function(a,b){
+                return a.issn - b.issn;
             })
             setLibros(docs);
         });
@@ -47,7 +51,7 @@ function Admin_libros() {
                             
                             <tr>
                                 <th>&nbsp;</th>
-                                <th>ID</th>
+                                <th className="text-left">ID</th>
                                 <th>Portada</th>
                                 <th>Titulo</th>
                                 <th>Autor(a)</th>

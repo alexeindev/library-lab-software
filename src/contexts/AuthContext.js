@@ -12,12 +12,17 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true)
 
   async function signup  (email, password,values) {
-    await auth.createUserWithEmailAndPassword(email, password);
+    await auth.createUserWithEmailAndPassword(email, password)
+    .catch((error) => {
+      var errorMessage = error.message;
+      alert(errorMessage)
+      // ..
+    });
     await db.collection('users').doc().set(values);
   }
 
-  async function createLibros  (values) {
-    await db.collection('libros').doc().set(values);
+  async function createCollection  (values,collection) {
+    await db.collection(collection).doc().set(values);
   }
 
   function login(email, password) {
@@ -39,8 +44,8 @@ export function AuthProvider({ children }) {
     return auth.signOut()
   }
 
-  function editcollection(values,id){
-    return db.collection('users').doc(id).update(values);
+  function editcollection(values,id,collection){
+    return db.collection(collection).doc(id).update(values);
   }
   function resetPassword(email) {
     return auth.sendPasswordResetEmail(email)
@@ -66,7 +71,7 @@ export function AuthProvider({ children }) {
   const value = {
     currentUser,
     login,
-    createLibros,
+    createCollection,
     editcollection,
     signup,
     logout,

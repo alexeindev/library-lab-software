@@ -2,6 +2,7 @@ import React,{useEffect, useState} from 'react'
 import {db} from "../firebase"
 import Navbar from "../components/Navbar";
 import "./LibrosPages.css"
+import { Link } from "react-router-dom";
 function LibrosPage(params) {
     const initialStateValues = {
 
@@ -20,21 +21,26 @@ function LibrosPage(params) {
     };
 
     const[books,setBooks]=useState(initialStateValues);
-    //const[id,setId]=useState('');
+    const[id,setId]=useState('');
     const getBooks = () => {
         db.collection("libros").onSnapshot((querySnapshot) => {
             
             querySnapshot.forEach((doc) => {
                 
                 if (doc.data().issn === params.match.params.keyword) {
-                    //setId(doc.id)
+                    setId(doc.id)
                     setBooks(doc.data());    
                     return
             }
             });
-            console.log(books)
+            
         });
     };
+
+    const onRedirect = (keyword) => {
+        const valor = '/comprar-libros/'+ keyword
+        return valor
+    }
 
     useEffect(()=>{
         getBooks(); // eslint-disable-next-line
@@ -48,7 +54,7 @@ function LibrosPage(params) {
                         <h2>{books.titulo}</h2>
                     </div>
                     <div className="col-6 text-center">
-                        <button type="button" className="btn btn-outline-warning">Comprar</button>
+                        <Link to={onRedirect(id)} params={{keyword: id}}><button type="button" className="btn btn-outline-warning">Comprar</button></Link>
                         <button type="button" className="btn btn-outline-warning">Agregar al carrito</button>
                     </div>
                 </div>

@@ -24,7 +24,7 @@ function Ingresar_Libros(props) {
   };
 
   //const {currentUser} = useAuth()
-  const { createLibros } = useAuth();
+  const { createCollection } = useAuth();
   const [values, setValues] = useState(initialStateValues);
   //const[imgfile, setImgfile]=useState({});
   const [url, setUrl] = useState([]);
@@ -77,10 +77,9 @@ function Ingresar_Libros(props) {
     await deleteImg(storageRef);
     history.push("/mi-perfil");
   };
-  const handlesubmit = async (e) => {
-    e.preventDefault();
+  const handlesubmit = async () => {
     console.log(values);
-    await createLibros(values);
+    await createCollection(values,'libros');
 
     setValues({ ...initialStateValues });
     history.push("/mi-perfil");
@@ -100,7 +99,7 @@ function Ingresar_Libros(props) {
           </div>
           <div>
             <Title>Añadir Libro</Title>
-            <form name='portada' onSubmit={handlesubmit}>
+            
               <FormRow>
                 <FormGroup id='titulo'>
                   <FormLabel>Titulo</FormLabel>
@@ -201,14 +200,10 @@ function Ingresar_Libros(props) {
                   />
                 </FormGroup>
               </FormRow>
-            </form>
+           
             <FormRow>
-              <Button type='submit'>Guardar</Button>
-              <form onSubmit={cancelarsubmit}>
-                <Button type='submit' light>
-                  Cancelar
-                </Button>
-              </form>
+              <i onClick={()=>{handlesubmit()}}><Button type='submit'>Guardar</Button></i>
+              <i onClick={()=>{cancelarsubmit()}}><Button type='submit' light>Cancelar</Button></i>
             </FormRow>
           </div>
         </MainWrapper>
