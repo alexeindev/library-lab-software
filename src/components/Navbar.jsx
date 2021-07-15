@@ -24,9 +24,14 @@ function Navbar() {
     return (
       <div>
         <NavContainer>
-          <Link style={{ textDecoration: "none" }} to='/'>
-            <Logo>Librería</Logo>
-          </Link>
+          <ButtonsContainer>
+            <Link style={{ textDecoration: "none" }} to='/'>
+              <Logo>Librería</Logo>
+            </Link>
+            <Link style={{ textDecoration: "none" }} to='/ver-noticias'>
+                <RegisterLink>Ver noticias</RegisterLink>
+            </Link>
+          </ButtonsContainer>
           <ButtonsContainer>
             {currentUser &&
             <Link style={{ textDecoration: "none" }} to='/mi-perfil'>

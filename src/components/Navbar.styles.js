@@ -36,6 +36,7 @@ export const RegisterLink = styled.p`
   text-decoration: none;
   margin: 1em;
   ${linkMixing}
+  
 `;
 
 export const CartLink = styled.p`
