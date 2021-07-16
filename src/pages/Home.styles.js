@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import icon from '../images/search.png'
 
 export const Container = styled.div`
   @media (min-width: 768px) {
@@ -43,4 +44,44 @@ export const HeroInformationContainer = styled.div`
   @media (min-width: 768px) {
     align-items: flex-start;
   }
+`;
+
+export const LibrosContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 20px;
+`;
+
+export const LibrosTitulo = styled.h4`
+  color: #34325E;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  width: 300px;
+`;
+
+export const LibrosPrecio = styled.h6`
+  color: #34325E;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+`;
+
+export const SearchInput = styled.input`
+  height: 50px;
+  width: 300px;
+  background: url(${icon}) no-repeat right ;
+  border: 2px solid #F39B34;
+  box-sizing: border-box;
+  border-radius: 36px;
+`;
+  
+export const ImgLibro = styled.img`
+  width: 265.31px;
+  high: 400px;
+  border-radius: 10px;
 `;

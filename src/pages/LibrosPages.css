@@ -1,0 +1,14 @@
+.container-content {
+    padding: 50px;
+}
+.card {
+    border-color: #F39B34;
+}
+h2{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 84px;
+    color: #34325E;
+}

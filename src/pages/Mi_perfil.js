@@ -32,20 +32,24 @@ function Mi_perfil() {
                                 <Links>Ingresar libros</Links>
                             </Link>
                         }
+                        {currentUser.email === 'g.anduquia@utp.edu.co' &&
+                            <Link style={{ textDecoration: "none" }} to='/crear-noticia'>
+                                <Links>Crear noticas</Links>
+                            </Link>
+                        }
+                        {currentUser.email === 'g.anduquia@utp.edu.co' &&
+                            <Link style={{ textDecoration: "none" }} to='/gestionar-noticias'>
+                                <Links>Gestionar noticas</Links>
+                            </Link>
+                        }
                         <Link style={{ textDecoration: "none" }} to='/edit-perfil'>
                             <Links>Editar Perfil</Links>
                         </Link>
-                        <Link style={{ textDecoration: "none" }} to='/'>
+                        <Link style={{ textDecoration: "none" }} to='/pedidos'>
                             <Links>Pedidos</Links>
                         </Link>
-                        <Link style={{ textDecoration: "none" }} to='/'>
+                        <Link style={{ textDecoration: "none" }} to='/info-financiera'>
                             <Links>Informacion financiera</Links>
-                        </Link>
-                        <Link style={{ textDecoration: "none" }} to='/'>
-                            <Links>Editorial</Links>
-                        </Link>
-                        <Link style={{ textDecoration: "none" }} to='/'>
-                            <Links>Idiomas</Links>
                         </Link>
                         
                     </InfoContainer>
